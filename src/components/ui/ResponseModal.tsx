@@ -13,11 +13,11 @@ export const ResponseModal = ({ type, title, message, onClose }: Props) => {
 
   return (
     <div
-      className="fixed inset-0 bg-black/50 flex justify-center items-center z-[60] p-4"
+      className="fixed inset-0 bg-black/50 flex justify-center items-center z-[60] p-3 sm:p-4 overflow-y-auto"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
       <div
-        className="bg-white rounded-xl shadow-xl max-w-md w-full p-6"
+        className="bg-white rounded-xl shadow-xl max-w-md w-full p-4 sm:p-6 my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <div className={`w-12 h-12 rounded-full ${iconBg} flex items-center justify-center mx-auto mb-4`}>
@@ -31,12 +31,12 @@ export const ResponseModal = ({ type, title, message, onClose }: Props) => {
             </svg>
           )}
         </div>
-        <h3 className="text-lg font-semibold text-[#25343F] text-center mb-2">{title}</h3>
-        <p className="text-[#25343F]/80 text-center text-sm mb-6">{message}</p>
+        <h3 className="text-base sm:text-lg font-semibold text-[#25343F] text-center mb-2">{title}</h3>
+        <p className="text-[#25343F]/80 text-center text-sm mb-6 break-words">{message}</p>
         <div className="flex justify-center">
           <button
             onClick={onClose}
-            className={`px-6 py-2 rounded-lg text-white font-medium transition ${buttonBg}`}
+            className={`px-6 py-2 rounded-lg text-white font-medium transition text-sm sm:text-base ${buttonBg}`}
           >
             OK
           </button>

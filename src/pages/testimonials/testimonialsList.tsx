@@ -13,6 +13,7 @@ import { AvatarPlaceholder } from "../../components/ui/AvatarPlaceholder";
 import { ResponseModal } from "../../components/ui/ResponseModal";
 import { ConfirmModal } from "../../components/ui/ConfirmModal";
 import { getApiErrorMessage } from "../../utils/apiError";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 const formatDate = (iso: string) =>
   new Date(iso).toLocaleDateString("en-US", {
@@ -20,6 +21,9 @@ const formatDate = (iso: string) =>
     month: "short",
     day: "numeric",
   });
+
+const truncateText = (text: string, maxLen: number) =>
+  text.length > maxLen ? `${text.slice(0, maxLen)}...` : text;
 
 export const TestimonialListPage = () => {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
@@ -40,6 +44,7 @@ export const TestimonialListPage = () => {
   } | null>(null);
   const [confirmDelete, setConfirmDelete] = useState<Testimonial | null>(null);
   const [deleteLoading, setDeleteLoading] = useState(false);
+  const showTableView = useMediaQuery(1024);
 
   const fetchTestimonials = async () => {
     setLoading(true);
@@ -115,16 +120,13 @@ export const TestimonialListPage = () => {
 
   return (
     <AdminLayout>
-      <div className="bg-white rounded-xl shadow-md border border-[#BFC9D1]/50 overflow-hidden">
-        <div className="p-6 border-b border-[#BFC9D1]/50">
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-            <h2 className="text-xl font-semibold text-[#25343F]">Testimonials</h2>
+      <div className="bg-white rounded-lg sm:rounded-xl shadow-md border border-[#BFC9D1]/50 overflow-hidden min-w-0 w-full">
+        <div className="p-4 sm:p-6 lg:p-6 xl:p-8 border-b border-[#BFC9D1]/50">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-4 lg:gap-4 xl:gap-6">
+            <h2 className="text-lg sm:text-xl lg:text-xl xl:text-2xl font-semibold text-[#25343F]">Testimonials</h2>
             <button
-              onClick={() => {
-                setEditItem(null);
-                setModalOpen(true);
-              }}
-              className="px-4 py-2 rounded-lg bg-[#25343F] text-white hover:bg-[#25343F]/90 transition font-medium"
+              onClick={() => { setEditItem(null); setModalOpen(true); }}
+              className="w-full sm:w-auto px-4 py-2.5 sm:py-2 lg:px-5 lg:py-2.5 xl:px-6 xl:py-3 rounded-lg bg-[#25343F] text-white hover:bg-[#25343F]/90 transition font-medium text-sm sm:text-base lg:text-base xl:text-lg"
             >
               Add Testimonial
             </button>
@@ -132,76 +134,107 @@ export const TestimonialListPage = () => {
         </div>
 
         {loading ? (
-          <div className="p-12 text-center text-[#25343F]/70">
+          <div className="p-6 sm:p-12 text-center text-[#25343F]/70 text-sm sm:text-base">
             Loading testimonials...
           </div>
         ) : testimonials.length === 0 ? (
-          <div className="p-12 text-center text-[#25343F]/70">
+          <div className="p-6 sm:p-12 text-center text-[#25343F]/70 text-sm sm:text-base">
             No testimonials yet. Add your first one.
           </div>
         ) : (
           <>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left">
-                <thead>
-                  <tr className="bg-[#EAEFEF] border-b border-[#BFC9D1]">
-                    <th className="px-4 py-3 text-sm font-semibold text-[#25343F]">Image</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-[#25343F]">Name</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-[#25343F]">Designation</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-[#25343F]">Company</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-[#25343F]">Testimonial</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-[#25343F]">Date</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-[#25343F]">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {testimonials.map((item) => (
-                    <tr
-                      key={item._id}
-                      className="border-b border-[#BFC9D1]/30 hover:bg-[#EAEFEF]/50 transition"
+            {/* One layout only: cards below 1024px, table from 1024px up */}
+            {!showTableView ? (
+              <div className="divide-y divide-[#BFC9D1]/30">
+                {testimonials.map((item) => (
+                  <div
+                    key={item._id}
+                    className="p-4 bg-[#FAFAFA] hover:bg-[#EAEFEF]/50 transition"
+                  >
+                    <div className="flex gap-3">
+                      {item.image ? (
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-12 h-12 rounded-full object-cover border-2 border-[#BFC9D1] shrink-0"
+                        />
+                      ) : (
+                        <AvatarPlaceholder name={item.name} className="w-12 h-12 shrink-0" />
+                      )}
+                      <div className="min-w-0 flex-1">
+                        <p className="font-medium text-[#25343F] text-sm">
+                          {item.name}
+                          {item.isOwner && (
+                            <span className="ml-1 text-xs bg-[#FF9B51] text-white px-1.5 py-0.5 rounded">Owner</span>
+                          )}
+                        </p>
+                        <p className="text-[#25343F]/80 text-xs">{item.designation} {item.company && `· ${item.company}`}</p>
+                      </div>
+                    </div>
+                    <p className="text-[#25343F]/80 text-xs mt-2 overflow-hidden max-h-12">{item.testimonial}</p>
+                    <p className="text-[#25343F]/60 text-xs mt-2">{formatDate(item.createdAt)}</p>
+                    <button
+                      onClick={() => openDetailModal(item._id)}
+                      className="w-full mt-3 py-2 rounded-lg bg-[#25343F] text-white text-sm font-medium"
                     >
-                      <td className="px-4 py-3">
-                        {item.image ? (
-                          <img
-                            src={item.image}
-                            alt={item.name}
-                            className="w-12 h-12 rounded-full object-cover border-2 border-[#BFC9D1]"
-                          />
-                        ) : (
-                          <AvatarPlaceholder name={item.name} className="w-12 h-12" />
-                        )}
-                      </td>
-                      <td className="px-4 py-3 font-medium text-[#25343F]">
-                        {item.name}
-                        {item.isOwner && (
-                          <span className="ml-2 text-xs bg-[#FF9B51] text-white px-2 py-0.5 rounded">
-                            Owner
-                          </span>
-                        )}
-                      </td>
-                      <td className="px-4 py-3 text-[#25343F]/80">{item.designation}</td>
-                      <td className="px-4 py-3 text-[#25343F]/80">{item.company}</td>
-                      <td className="px-4 py-3 max-w-xs truncate text-[#25343F]/80">
-                        {item.testimonial}
-                      </td>
-                      <td className="px-4 py-3 text-sm text-[#25343F]/70">
-                        {formatDate(item.createdAt)}
-                      </td>
-                      <td className="px-4 py-3">
-                        <button
-                          onClick={() => openDetailModal(item._id)}
-                          className="px-3 py-1.5 rounded-lg bg-[#25343F] text-white hover:bg-[#25343F]/90 text-sm font-medium transition"
-                        >
-                          View
-                        </button>
-                      </td>
+                      View
+                    </button>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="table-scroll-wrap">
+                <table className="w-full min-w-[1100px] text-left border-collapse table-auto">
+                  <thead>
+                    <tr className="bg-[#EAEFEF] border-b border-[#BFC9D1]">
+                      <th className="px-3 py-2 sm:px-4 sm:py-3 text-sm font-semibold text-[#25343F] text-left">Image</th>
+                      <th className="px-3 py-2 sm:px-4 sm:py-3 text-sm font-semibold text-[#25343F] text-left">Name</th>
+                      <th className="px-3 py-2 sm:px-4 sm:py-3 text-sm font-semibold text-[#25343F] text-left">Designation</th>
+                      <th className="px-3 py-2 sm:px-4 sm:py-3 text-sm font-semibold text-[#25343F] text-left">Company</th>
+                      <th className="px-3 py-2 sm:px-4 sm:py-3 text-sm font-semibold text-[#25343F] text-left">Testimonial</th>
+                      <th className="px-3 py-2 sm:px-4 sm:py-3 text-sm font-semibold text-[#25343F] text-left whitespace-nowrap">Date</th>
+                      <th className="px-3 py-2 sm:px-4 sm:py-3 pr-6 text-sm font-semibold text-[#25343F] text-left">Actions</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody>
+                    {testimonials.map((item) => (
+                      <tr key={item._id} className="border-b border-[#BFC9D1]/30 hover:bg-[#EAEFEF]/50 transition">
+                        <td className="px-3 py-2 sm:px-4 sm:py-3">
+                          {item.image ? (
+                            <img src={item.image} alt={item.name} className="w-10 h-10 rounded-full object-cover border-2 border-[#BFC9D1]" />
+                          ) : (
+                            <AvatarPlaceholder name={item.name} className="w-10 h-10" />
+                          )}
+                        </td>
+                        <td className="px-3 py-2 sm:px-4 sm:py-3 align-top whitespace-nowrap">
+                          <span className="flex items-center gap-1">
+                            <span className="font-medium text-[#25343F] text-sm">{item.name}</span>
+                            {item.isOwner && <span className="shrink-0 text-xs bg-[#FF9B51] text-white px-1.5 py-0.5 rounded">Owner</span>}
+                          </span>
+                        </td>
+                        <td className="px-3 py-2 sm:px-4 sm:py-3 align-top whitespace-nowrap">
+                          <span className="text-[#25343F]/80 text-sm">{item.designation ?? "—"}</span>
+                        </td>
+                        <td className="px-3 py-2 sm:px-4 sm:py-3 align-top whitespace-nowrap">
+                          <span className="text-[#25343F]/80 text-sm">{item.company ?? "—"}</span>
+                        </td>
+                        <td className="px-3 py-2 sm:px-4 sm:py-3 align-top whitespace-nowrap max-w-[240px]">
+                          <span className="block truncate text-[#25343F]/80 text-sm" title={item.testimonial}>{truncateText(item.testimonial, 80)}</span>
+                        </td>
+                        <td className="px-3 py-2 sm:px-4 sm:py-3 text-sm text-[#25343F]/70 whitespace-nowrap">{formatDate(item.createdAt)}</td>
+                        <td className="px-3 py-2 sm:px-4 sm:py-3 pr-6">
+                          <button type="button" onClick={() => openDetailModal(item._id)} className="shrink-0 px-3 py-1.5 rounded-lg bg-[#25343F] text-white hover:bg-[#25343F]/90 text-sm font-medium whitespace-nowrap">
+                            View
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
 
-            <div className="p-4 border-t border-[#BFC9D1]/50">
+            <div className="p-4 sm:p-4 lg:p-5 xl:p-6 border-t border-[#BFC9D1]/50">
               <Pagination
                 page={page}
                 limit={limit}

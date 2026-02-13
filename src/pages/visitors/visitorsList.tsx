@@ -6,6 +6,7 @@ import { Pagination } from "../../components/ui/Pagination";
 import { VisitorDetailModal } from "./visitorDetailModal";
 import { ResponseModal } from "../../components/ui/ResponseModal";
 import { getApiErrorMessage } from "../../utils/apiError";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 const formatDate = (iso: string) =>
   new Date(iso).toLocaleDateString("en-US", {
@@ -30,6 +31,7 @@ export const VisitorListPage = () => {
     title: string;
     message: string;
   } | null>(null);
+  const showTableView = useMediaQuery(1024);
 
   const fetchVisitors = async (): Promise<void> => {
     setLoading(true);
@@ -74,68 +76,90 @@ export const VisitorListPage = () => {
 
   return (
     <AdminLayout>
-      <div className="bg-white rounded-xl shadow-md border border-[#BFC9D1]/50 overflow-hidden">
-        <div className="p-6 border-b border-[#BFC9D1]/50">
-          <h2 className="text-xl font-semibold text-[#25343F]">Visitors</h2>
-          <p className="text-sm text-[#25343F]/70 mt-1">
+      <div className="bg-white rounded-lg sm:rounded-xl shadow-md border border-[#BFC9D1]/50 overflow-hidden min-w-0 w-full">
+        <div className="p-4 sm:p-6 lg:p-6 xl:p-8 border-b border-[#BFC9D1]/50">
+          <h2 className="text-lg sm:text-xl lg:text-xl xl:text-2xl font-semibold text-[#25343F]">Visitors</h2>
+          <p className="text-sm lg:text-base xl:text-base text-[#25343F]/70 mt-1">
             Unique visitors and page views
           </p>
         </div>
 
         {loading ? (
-          <div className="p-12 text-center text-[#25343F]/70">Loading visitors...</div>
+          <div className="p-6 sm:p-12 text-center text-[#25343F]/70 text-sm sm:text-base">Loading visitors...</div>
         ) : visitors.length === 0 ? (
-          <div className="p-12 text-center text-[#25343F]/70">
+          <div className="p-6 sm:p-12 text-center text-[#25343F]/70 text-sm sm:text-base">
             No visitors recorded yet.
           </div>
         ) : (
           <>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left">
-                <thead>
-                  <tr className="bg-[#EAEFEF] border-b border-[#BFC9D1]">
-                    <th className="px-4 py-3 text-sm font-semibold text-[#25343F]">IP Address</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-[#25343F]">Visits</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-[#25343F]">First Visit</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-[#25343F]">Last Seen</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-[#25343F]">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {visitors.map((visitor) => (
-                    <tr
-                      key={visitor._id}
-                      className="border-b border-[#BFC9D1]/30 hover:bg-[#EAEFEF]/50 transition"
+            {/* One layout only: cards below 1024px, table from 1024px up */}
+            {!showTableView ? (
+              <div className="divide-y divide-[#BFC9D1]/30">
+                {visitors.map((visitor) => (
+                  <div
+                    key={visitor._id}
+                    className="p-4 bg-[#FAFAFA] hover:bg-[#EAEFEF]/50 transition"
+                  >
+                    <p className="font-mono font-medium text-[#25343F] text-sm break-all">{visitor.ipAddress}</p>
+                    <div className="flex items-center justify-between mt-2 flex-wrap gap-2">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-[#FF9B51]/20 text-[#25343F] font-medium text-sm">
+                        {visitor.visits} visit{visitor.visits !== 1 ? "s" : ""}
+                      </span>
+                    </div>
+                    <p className="text-[#25343F]/70 text-xs mt-2">First: {formatDate(visitor.createdAt)}</p>
+                    <p className="text-[#25343F]/70 text-xs">Last: {formatDate(visitor.updatedAt)}</p>
+                    <button
+                      onClick={() => openDetailModal(visitor._id)}
+                      className="w-full mt-3 py-2 rounded-lg bg-[#25343F] text-white text-sm font-medium"
                     >
-                      <td className="px-4 py-3 font-mono text-sm text-[#25343F]">
-                        {visitor.ipAddress}
-                      </td>
-                      <td className="px-4 py-3">
-                        <span className="inline-flex items-center justify-center min-w-[2rem] px-2 py-0.5 rounded-full bg-[#FF9B51]/20 text-[#25343F] font-medium text-sm">
-                          {visitor.visits}
-                        </span>
-                      </td>
-                      <td className="px-4 py-3 text-sm text-[#25343F]/70">
-                        {formatDate(visitor.createdAt)}
-                      </td>
-                      <td className="px-4 py-3 text-sm text-[#25343F]/70">
-                        {formatDate(visitor.updatedAt)}
-                      </td>
-                      <td className="px-4 py-3">
-                        <button
-                          onClick={() => openDetailModal(visitor._id)}
-                          className="px-3 py-1.5 rounded-lg bg-[#25343F] text-white hover:bg-[#25343F]/90 text-sm font-medium transition"
-                        >
-                          View
-                        </button>
-                      </td>
+                      View
+                    </button>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="table-scroll-wrap">
+                <table className="w-full min-w-[520px] text-left border-collapse table-fixed">
+                  <colgroup>
+                    <col style={{ width: "24%" }} />
+                    <col style={{ width: "10%" }} />
+                    <col style={{ width: "26%" }} />
+                    <col style={{ width: "26%" }} />
+                    <col style={{ width: "14%" }} />
+                  </colgroup>
+                  <thead>
+                    <tr className="bg-[#EAEFEF] border-b border-[#BFC9D1]">
+                      <th className="px-3 py-2 sm:px-4 sm:py-3 lg:px-4 lg:py-3 xl:px-5 xl:py-4 text-xs sm:text-sm lg:text-sm xl:text-base font-semibold text-[#25343F] text-left">IP Address</th>
+                      <th className="px-3 py-2 sm:px-4 sm:py-3 lg:px-4 lg:py-3 xl:px-5 xl:py-4 text-xs sm:text-sm lg:text-sm xl:text-base font-semibold text-[#25343F] text-left">Visits</th>
+                      <th className="px-3 py-2 sm:px-4 sm:py-3 lg:px-4 lg:py-3 xl:px-5 xl:py-4 text-xs sm:text-sm lg:text-sm xl:text-base font-semibold text-[#25343F] text-left">First Visit</th>
+                      <th className="px-3 py-2 sm:px-4 sm:py-3 lg:px-4 lg:py-3 xl:px-5 xl:py-4 text-xs sm:text-sm lg:text-sm xl:text-base font-semibold text-[#25343F] text-left">Last Seen</th>
+                      <th className="px-3 py-2 sm:px-4 sm:py-3 lg:px-4 lg:py-3 xl:px-5 xl:py-4 text-xs sm:text-sm lg:text-sm xl:text-base font-semibold text-[#25343F] text-left">Actions</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody>
+                    {visitors.map((visitor) => (
+                      <tr key={visitor._id} className="border-b border-[#BFC9D1]/30 hover:bg-[#EAEFEF]/50 transition">
+                        <td className="px-3 py-2 sm:px-4 sm:py-3 lg:px-4 lg:py-3 xl:px-5 xl:py-4 min-w-0">
+                          <span className="block truncate font-mono text-[#25343F] text-xs sm:text-sm lg:text-sm xl:text-base" title={visitor.ipAddress}>{visitor.ipAddress}</span>
+                        </td>
+                        <td className="px-3 py-2 sm:px-4 sm:py-3 lg:px-4 lg:py-3 xl:px-5 xl:py-4">
+                          <span className="inline-flex items-center justify-center min-w-[2rem] px-2 py-0.5 rounded-full bg-[#FF9B51]/20 text-[#25343F] font-medium text-xs sm:text-sm lg:text-sm xl:text-base">{visitor.visits}</span>
+                        </td>
+                        <td className="px-3 py-2 sm:px-4 sm:py-3 lg:px-4 lg:py-3 xl:px-5 xl:py-4 text-xs sm:text-sm lg:text-sm xl:text-base text-[#25343F]/70 whitespace-nowrap">{formatDate(visitor.createdAt)}</td>
+                        <td className="px-3 py-2 sm:px-4 sm:py-3 lg:px-4 lg:py-3 xl:px-5 xl:py-4 text-xs sm:text-sm lg:text-sm xl:text-base text-[#25343F]/70 whitespace-nowrap">{formatDate(visitor.updatedAt)}</td>
+                        <td className="px-3 py-2 sm:px-4 sm:py-3 lg:px-4 lg:py-3 xl:px-5 xl:py-4 min-w-0">
+                          <button type="button" onClick={() => openDetailModal(visitor._id)} className="shrink-0 px-3 py-1.5 sm:px-4 sm:py-2 lg:px-4 lg:py-2 xl:px-5 xl:py-2 rounded-lg bg-[#25343F] text-white hover:bg-[#25343F]/90 text-xs sm:text-sm lg:text-sm xl:text-base font-medium whitespace-nowrap">
+                            View
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
 
-            <div className="p-4 border-t border-[#BFC9D1]/50">
+            <div className="p-4 sm:p-4 lg:p-5 xl:p-6 border-t border-[#BFC9D1]/50">
               <Pagination
                 page={page}
                 limit={limit}

@@ -72,22 +72,22 @@ export const TestimonialDetailModal = ({
           <span>Updated: {formatDate(item.updatedAt)}</span>
         </div>
 
-        <div className="flex justify-end gap-2 pt-4 border-t border-[#BFC9D1]">
+        <div className="flex flex-wrap justify-end gap-2 pt-4 border-t border-[#BFC9D1]">
           <button
             onClick={() => onEdit(item)}
-            className="px-4 py-2 rounded-lg bg-[#25343F] text-white hover:bg-[#25343F]/90 font-medium transition"
+            className="px-3 py-2 sm:px-4 rounded-lg bg-[#25343F] text-white hover:bg-[#25343F]/90 font-medium transition text-sm sm:text-base"
           >
             Edit
           </button>
           <button
             onClick={() => onDelete(item)}
-            className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 font-medium transition"
+            className="px-3 py-2 sm:px-4 rounded-lg bg-red-600 text-white hover:bg-red-700 font-medium transition text-sm sm:text-base"
           >
             Delete
           </button>
           <button
             onClick={onClose}
-            className="px-4 py-2 rounded-lg bg-[#BFC9D1] text-[#25343F] hover:bg-[#BFC9D1]/80 font-medium transition"
+            className="px-3 py-2 sm:px-4 rounded-lg bg-[#BFC9D1] text-[#25343F] hover:bg-[#BFC9D1]/80 font-medium transition text-sm sm:text-base"
           >
             Close
           </button>

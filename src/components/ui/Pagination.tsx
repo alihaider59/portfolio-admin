@@ -21,21 +21,21 @@ export const Pagination = ({
   const end = Math.min(page * limit, total);
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6 pt-4 border-t border-[#BFC9D1]">
-      <p className="text-sm text-[#25343F]/70">
+    <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 mt-4 sm:mt-6 pt-4 border-t border-[#BFC9D1]">
+      <p className="text-xs sm:text-sm text-[#25343F]/70 text-center sm:text-left order-2 sm:order-1">
         Showing <span className="font-medium">{start}</span> to{" "}
         <span className="font-medium">{end}</span> of{" "}
         <span className="font-medium">{total}</span> results
       </p>
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 order-1 sm:order-2">
         <button
           onClick={() => onPageChange(page - 1)}
           disabled={page <= 1}
-          className="px-3 py-1.5 rounded-lg bg-[#BFC9D1] text-[#25343F] hover:bg-[#BFC9D1]/80 disabled:opacity-50 disabled:cursor-not-allowed transition"
+          className="px-2.5 py-1.5 sm:px-3 rounded-lg bg-[#BFC9D1] text-[#25343F] hover:bg-[#BFC9D1]/80 disabled:opacity-50 disabled:cursor-not-allowed transition text-xs sm:text-sm"
         >
           Previous
         </button>
-        <div className="flex gap-1">
+        <div className="flex flex-wrap justify-center gap-1">
           {Array.from({ length: totalPages }, (_, i) => i + 1)
             .filter((p) => {
               if (totalPages <= 7) return true;
@@ -49,11 +49,11 @@ export const Pagination = ({
               return (
                 <span key={p} className="flex items-center gap-1">
                   {showEllipsis && (
-                    <span className="px-2 text-[#25343F]/50">...</span>
+                    <span className="px-1.5 sm:px-2 text-[#25343F]/50 text-xs">...</span>
                   )}
                   <button
                     onClick={() => onPageChange(p)}
-                    className={`min-w-[2rem] px-3 py-1.5 rounded-lg transition ${
+                    className={`min-w-[1.75rem] sm:min-w-[2rem] px-2 sm:px-3 py-1.5 rounded-lg transition text-xs sm:text-sm ${
                       page === p
                         ? "bg-[#FF9B51] text-white"
                         : "bg-[#BFC9D1] text-[#25343F] hover:bg-[#BFC9D1]/80"
@@ -68,7 +68,7 @@ export const Pagination = ({
         <button
           onClick={() => onPageChange(page + 1)}
           disabled={page >= totalPages}
-          className="px-3 py-1.5 rounded-lg bg-[#BFC9D1] text-[#25343F] hover:bg-[#BFC9D1]/80 disabled:opacity-50 disabled:cursor-not-allowed transition"
+          className="px-2.5 py-1.5 sm:px-3 rounded-lg bg-[#BFC9D1] text-[#25343F] hover:bg-[#BFC9D1]/80 disabled:opacity-50 disabled:cursor-not-allowed transition text-xs sm:text-sm"
         >
           Next
         </button>

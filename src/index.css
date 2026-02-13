@@ -1,3 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Responsive: prevent horizontal overflow and improve touch targets */
+@layer base {
+  html {
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    min-width: 0;
+    overflow-x: hidden;
+  }
+}
+
+/* Smooth scrolling for overflow areas on iOS */
+@layer utilities {
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Table scroll: horizontal scrollbar at bottom when table is wider than container */
+.table-scroll-wrap {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #25343F #EAEFEF;
+  padding-bottom: 4px; /* space above scrollbar so it’s visible */
+}
+.table-scroll-wrap::-webkit-scrollbar {
+  height: 10px;
+}
+.table-scroll-wrap::-webkit-scrollbar-track {
+  background: #EAEFEF;
+  border-radius: 5px;
+  margin: 0 4px;
+}
+.table-scroll-wrap::-webkit-scrollbar-thumb {
+  background: #25343F;
+  border-radius: 5px;
+}
+.table-scroll-wrap::-webkit-scrollbar-thumb:hover {
+  background: #FF9B51;
+}

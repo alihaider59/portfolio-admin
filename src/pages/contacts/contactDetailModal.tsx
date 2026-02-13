@@ -60,7 +60,7 @@ export const ContactDetailModal = ({ item, loading, onClose }: Props) => (
         <div className="flex justify-end pt-4 border-t border-[#BFC9D1]">
           <button
             onClick={onClose}
-            className="px-4 py-2 rounded-lg bg-[#25343F] text-white hover:bg-[#25343F]/90 font-medium transition"
+            className="w-full sm:w-auto px-4 py-2 rounded-lg bg-[#25343F] text-white hover:bg-[#25343F]/90 font-medium transition text-sm sm:text-base"
           >
             Close
           </button>

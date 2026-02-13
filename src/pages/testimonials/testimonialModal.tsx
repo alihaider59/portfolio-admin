@@ -114,11 +114,11 @@ export const TestimonialModal = ({ item, onClose, onSuccess }: Props) => {
 
   return (
     <div
-      className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-4"
+      className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-3 sm:p-4 overflow-y-auto"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="bg-[#EAEFEF] p-6 rounded-xl w-full max-w-md shadow-xl max-h-[90vh] overflow-y-auto">
-        <h2 className="text-lg font-semibold text-[#25343F] mb-4">
+      <div className="bg-[#EAEFEF] p-4 sm:p-6 rounded-xl w-full max-w-md shadow-xl max-h-[90vh] overflow-y-auto my-auto">
+        <h2 className="text-base sm:text-lg font-semibold text-[#25343F] mb-4">
           {item ? "Edit" : "Add"} Testimonial
         </h2>
 
@@ -204,7 +204,7 @@ export const TestimonialModal = ({ item, onClose, onSuccess }: Props) => {
 
           <div>
             <label className="block text-sm font-medium text-[#25343F] mb-1">Photo (optional)</label>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
               <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-[#BFC9D1] bg-[#BFC9D1]/50 flex items-center justify-center">
                 {preview ? (
                   <img src={preview} alt="Preview" className="w-full h-full object-cover" />
@@ -221,17 +221,17 @@ export const TestimonialModal = ({ item, onClose, onSuccess }: Props) => {
             </div>
           </div>
 
-          <div className="flex justify-end gap-3 pt-2">
+          <div className="flex flex-col-reverse sm:flex-row justify-end gap-2 sm:gap-3 pt-2">
             <button
               onClick={onClose}
-              className="px-4 py-2 rounded-lg bg-[#BFC9D1] text-[#25343F] hover:bg-[#BFC9D1]/80 transition"
+              className="w-full sm:w-auto px-4 py-2 rounded-lg bg-[#BFC9D1] text-[#25343F] hover:bg-[#BFC9D1]/80 transition text-sm sm:text-base"
             >
               Cancel
             </button>
             <button
               onClick={handleSubmit}
               disabled={loading}
-              className="px-4 py-2 rounded-lg bg-[#25343F] text-white hover:bg-[#25343F]/90 disabled:opacity-50 transition"
+              className="w-full sm:w-auto px-4 py-2 rounded-lg bg-[#25343F] text-white hover:bg-[#25343F]/90 disabled:opacity-50 transition text-sm sm:text-base"
             >
               {loading ? "Saving..." : item ? "Update" : "Create"}
             </button>

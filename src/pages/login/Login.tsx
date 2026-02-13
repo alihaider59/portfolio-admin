@@ -28,9 +28,9 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#EAEFEF] flex items-center justify-center">
-      <div className="w-full max-w-md bg-[#BFC9D1] p-8 rounded-xl shadow-md">
-        <h2 className="text-2xl font-bold text-[#25343F] mb-6 text-center">
+    <div className="min-h-screen bg-[#EAEFEF] flex items-center justify-center p-4 sm:p-6">
+      <div className="w-full max-w-md bg-[#BFC9D1] p-6 sm:p-8 rounded-xl shadow-md">
+        <h2 className="text-xl sm:text-2xl font-bold text-[#25343F] mb-6 text-center">
           Admin Login
         </h2>
 
