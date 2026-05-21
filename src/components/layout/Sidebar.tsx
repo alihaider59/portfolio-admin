@@ -85,6 +85,16 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
           >
             Testimonials
           </NavLink>
+
+          <NavLink
+            to="/projects"
+            onClick={onClose}
+            className={({ isActive }) =>
+              `${linkClasses} ${isActive ? "bg-[#FF9B51] text-white" : ""}`
+            }
+          >
+            Projects
+          </NavLink>
         </nav>
       </aside>
     </>
