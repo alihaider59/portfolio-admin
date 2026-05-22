@@ -7,8 +7,11 @@ interface SidebarProps {
 }
 
 export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
-  const linkClasses =
-    "block px-4 py-3 rounded-md transition hover:bg-[#FF9B51] hover:text-white text-sm sm:text-base";
+  const linkBase =
+    "block px-4 py-3 rounded-md transition text-sm sm:text-base";
+  const linkInactive = "text-[#17153B] hover:bg-[#C8ACD6]/40";
+  const linkActive =
+    "bg-[#17153B] !text-white hover:bg-[#17153B] hover:!text-white";
 
   return (
     <>
@@ -22,7 +25,8 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
 
       <aside
         className={`
-          fixed top-0 left-0 bottom-0 z-50 w-64 bg-[#25343F] text-white p-4
+          fixed top-0 left-0 bottom-0 z-50 w-64 bg-white text-[#17153B] p-4
+          border-r border-[#433D8B]/25 shadow-sm
           transform transition-transform duration-200 ease-out
           lg:relative lg:translate-x-0 lg:z-auto lg:min-h-full lg:self-stretch
           ${isOpen ? "translate-x-0" : "-translate-x-full"}
@@ -31,12 +35,12 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         <div className="flex items-center justify-between gap-3 mb-6 lg:mb-8">
           <div className="flex items-center gap-3 min-w-0">
             <img src={logo} alt="Logo" className="w-10 h-10 rounded-lg object-cover shrink-0" />
-            <h1 className="text-lg sm:text-xl font-bold truncate">Ali Haider</h1>
+            <h1 className="text-lg sm:text-xl font-bold truncate text-[#17153B]">Ali Haider</h1>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="p-2 rounded-lg hover:bg-white/10 lg:hidden shrink-0"
+            className="p-2 rounded-lg text-[#17153B] hover:bg-[#17153B]/10 lg:hidden shrink-0"
             aria-label="Close menu"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -50,7 +54,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
             to="/dashboard"
             onClick={onClose}
             className={({ isActive }) =>
-              `${linkClasses} ${isActive ? "bg-[#FF9B51] text-white" : ""}`
+              `${linkBase} ${isActive ? linkActive : linkInactive}`
             }
           >
             Dashboard
@@ -60,7 +64,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
             to="/contacts"
             onClick={onClose}
             className={({ isActive }) =>
-              `${linkClasses} ${isActive ? "bg-[#FF9B51] text-white" : ""}`
+              `${linkBase} ${isActive ? linkActive : linkInactive}`
             }
           >
             Contacts
@@ -70,7 +74,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
             to="/visitors"
             onClick={onClose}
             className={({ isActive }) =>
-              `${linkClasses} ${isActive ? "bg-[#FF9B51] text-white" : ""}`
+              `${linkBase} ${isActive ? linkActive : linkInactive}`
             }
           >
             Visitors
@@ -80,7 +84,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
             to="/testimonials"
             onClick={onClose}
             className={({ isActive }) =>
-              `${linkClasses} ${isActive ? "bg-[#FF9B51] text-white" : ""}`
+              `${linkBase} ${isActive ? linkActive : linkInactive}`
             }
           >
             Testimonials
@@ -90,10 +94,30 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
             to="/projects"
             onClick={onClose}
             className={({ isActive }) =>
-              `${linkClasses} ${isActive ? "bg-[#FF9B51] text-white" : ""}`
+              `${linkBase} ${isActive ? linkActive : linkInactive}`
             }
           >
             Projects
+          </NavLink>
+
+          <NavLink
+            to="/experiences"
+            onClick={onClose}
+            className={({ isActive }) =>
+              `${linkBase} ${isActive ? linkActive : linkInactive}`
+            }
+          >
+            Experiences
+          </NavLink>
+
+          <NavLink
+            to="/skills"
+            onClick={onClose}
+            className={({ isActive }) =>
+              `${linkBase} ${isActive ? linkActive : linkInactive}`
+            }
+          >
+            Skills
           </NavLink>
         </nav>
       </aside>

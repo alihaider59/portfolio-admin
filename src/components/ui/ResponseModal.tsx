@@ -31,8 +31,8 @@ export const ResponseModal = ({ type, title, message, onClose }: Props) => {
             </svg>
           )}
         </div>
-        <h3 className="text-base sm:text-lg font-semibold text-[#25343F] text-center mb-2">{title}</h3>
-        <p className="text-[#25343F]/80 text-center text-sm mb-6 break-words">{message}</p>
+        <h3 className="text-base sm:text-lg font-semibold text-[#17153B] text-center mb-2">{title}</h3>
+        <p className="text-[#17153B]/80 text-center text-sm mb-6 break-words">{message}</p>
         <div className="flex justify-center">
           <button
             onClick={onClose}

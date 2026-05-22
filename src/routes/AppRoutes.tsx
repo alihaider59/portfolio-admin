@@ -8,6 +8,8 @@ import { ContactListPage } from "../pages/contacts/contactsList";
 import { VisitorListPage } from "../pages/visitors/visitorsList";
 import { TestimonialListPage } from "../pages/testimonials/testimonialsList";
 import { ProjectListPage } from "../pages/projects/projectsList";
+import { ExperienceListPage } from "../pages/experiences/experiencesList";
+import { SkillListPage } from "../pages/skills/skillsList";
 
 export const AppRoutes = () => {
   return (
@@ -55,6 +57,22 @@ export const AppRoutes = () => {
           element={
             <ProtectedRoute>
               <ProjectListPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/experiences"
+          element={
+            <ProtectedRoute>
+              <ExperienceListPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/skills"
+          element={
+            <ProtectedRoute>
+              <SkillListPage />
             </ProtectedRoute>
           }
         />

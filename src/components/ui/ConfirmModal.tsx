@@ -22,7 +22,7 @@ export const ConfirmModal = ({
   const confirmBg =
     variant === "danger"
       ? "bg-red-600 hover:bg-red-700"
-      : "bg-[#25343F] hover:bg-[#25343F]/90";
+      : "bg-[#17153B] hover:bg-[#17153B]/90";
 
   return (
     <div
@@ -33,12 +33,12 @@ export const ConfirmModal = ({
         className="bg-white rounded-xl shadow-xl max-w-md w-full p-4 sm:p-6 my-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <h3 className="text-base sm:text-lg font-semibold text-[#25343F] mb-2">{title}</h3>
-        <p className="text-[#25343F]/80 text-sm mb-6 break-words">{message}</p>
+        <h3 className="text-base sm:text-lg font-semibold text-[#17153B] mb-2">{title}</h3>
+        <p className="text-[#17153B]/80 text-sm mb-6 break-words">{message}</p>
         <div className="flex flex-col-reverse sm:flex-row justify-end gap-2 sm:gap-3">
           <button
             onClick={onCancel}
-            className="w-full sm:w-auto px-4 py-2 rounded-lg bg-[#BFC9D1] text-[#25343F] hover:bg-[#BFC9D1]/80 font-medium transition text-sm sm:text-base"
+            className="w-full sm:w-auto px-4 py-2 rounded-lg bg-[#433D8B] text-[#17153B] hover:bg-[#433D8B]/80 font-medium transition text-sm sm:text-base"
           >
             {cancelLabel}
           </button>

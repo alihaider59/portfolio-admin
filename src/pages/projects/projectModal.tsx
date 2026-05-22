@@ -161,8 +161,8 @@ export const ProjectModal = ({ item, onClose, onSuccess }: Props) => {
   };
 
   const fieldClass = (field: string) =>
-    `w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#FF9B51] focus:border-transparent ${
-      errors[field] ? "border-red-500" : "border-[#BFC9D1]"
+    `w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#C8ACD6] focus:border-transparent ${
+      errors[field] ? "border-red-500" : "border-[#433D8B]"
     }`;
 
   return (
@@ -170,8 +170,8 @@ export const ProjectModal = ({ item, onClose, onSuccess }: Props) => {
       className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-3 sm:p-4 overflow-y-auto"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="bg-[#EAEFEF] p-4 sm:p-6 rounded-xl w-full max-w-lg shadow-xl max-h-[90vh] overflow-y-auto my-auto">
-        <h2 className="text-base sm:text-lg font-semibold text-[#25343F] mb-4">
+      <div className="bg-[#F0EBF5] p-4 sm:p-6 rounded-xl w-full max-w-lg shadow-xl max-h-[90vh] overflow-y-auto my-auto">
+        <h2 className="text-base sm:text-lg font-semibold text-[#17153B] mb-4">
           {item ? "Edit" : "Add"} Project
         </h2>
 
@@ -181,7 +181,7 @@ export const ProjectModal = ({ item, onClose, onSuccess }: Props) => {
 
         <div className="flex flex-col gap-4">
           <div>
-            <label className="block text-sm font-medium text-[#25343F] mb-1">
+            <label className="block text-sm font-medium text-[#17153B] mb-1">
               Name <span className="text-red-500">*</span>
             </label>
             <input
@@ -195,7 +195,7 @@ export const ProjectModal = ({ item, onClose, onSuccess }: Props) => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-[#25343F] mb-1">
+            <label className="block text-sm font-medium text-[#17153B] mb-1">
               Description <span className="text-red-500">*</span>
             </label>
             <textarea
@@ -212,7 +212,7 @@ export const ProjectModal = ({ item, onClose, onSuccess }: Props) => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-[#25343F] mb-1">Sort Order</label>
+              <label className="block text-sm font-medium text-[#17153B] mb-1">Sort Order</label>
               <input
                 type="number"
                 min={0}
@@ -230,28 +230,28 @@ export const ProjectModal = ({ item, onClose, onSuccess }: Props) => {
                   type="checkbox"
                   checked={isPrivate}
                   onChange={(e) => setIsPrivate(e.target.checked)}
-                  className="rounded border-[#BFC9D1] text-[#FF9B51] focus:ring-[#FF9B51]"
+                  className="rounded border-[#433D8B] text-[#C8ACD6] focus:ring-[#C8ACD6]"
                 />
-                <span className="text-sm text-[#25343F]">Private project</span>
+                <span className="text-sm text-[#17153B]">Private project</span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={isActive}
                   onChange={(e) => setIsActive(e.target.checked)}
-                  className="rounded border-[#BFC9D1] text-[#FF9B51] focus:ring-[#FF9B51]"
+                  className="rounded border-[#433D8B] text-[#C8ACD6] focus:ring-[#C8ACD6]"
                 />
-                <span className="text-sm text-[#25343F]">Active (visible on portfolio)</span>
+                <span className="text-sm text-[#17153B]">Active (visible on portfolio)</span>
               </label>
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-[#25343F] mb-1">
-              Project Image <span className="text-[#25343F]/60 font-normal">(optional)</span>
+            <label className="block text-sm font-medium text-[#17153B] mb-1">
+              Project Image <span className="text-[#17153B]/60 font-normal">(optional)</span>
             </label>
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
-              <div className="w-24 h-16 rounded-lg overflow-hidden border-2 border-[#BFC9D1] bg-[#BFC9D1]/50 flex items-center justify-center">
+              <div className="w-24 h-16 rounded-lg overflow-hidden border-2 border-[#433D8B] bg-[#433D8B]/50 flex items-center justify-center">
                 {preview ? (
                   <img src={preview} alt="Preview" className="w-full h-full object-cover" />
                 ) : (
@@ -262,20 +262,20 @@ export const ProjectModal = ({ item, onClose, onSuccess }: Props) => {
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
-                className="text-sm text-[#25343F] file:mr-2 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#25343F] file:text-white file:cursor-pointer hover:file:bg-[#25343F]/90"
+                className="text-sm text-[#17153B] file:mr-2 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#17153B] file:text-white file:cursor-pointer hover:file:bg-[#17153B]/90"
               />
             </div>
           </div>
 
           <div>
             <div className="flex justify-between items-center mb-2">
-              <label className="text-sm font-medium text-[#25343F]">
+              <label className="text-sm font-medium text-[#17153B]">
                 Buttons <span className="text-red-500">*</span>
               </label>
               <button
                 type="button"
                 onClick={addButton}
-                className="text-xs sm:text-sm text-[#FF9B51] hover:underline font-medium"
+                className="text-xs sm:text-sm text-[#C8ACD6] hover:underline font-medium"
               >
                 + Add button
               </button>
@@ -287,10 +287,10 @@ export const ProjectModal = ({ item, onClose, onSuccess }: Props) => {
               {buttons.map((btn, index) => (
                 <div
                   key={index}
-                  className="p-3 bg-[#BFC9D1]/40 rounded-lg space-y-2 border border-[#BFC9D1]/60"
+                  className="p-3 bg-[#433D8B]/40 rounded-lg space-y-2 border border-[#433D8B]/60"
                 >
                   <div className="flex justify-between items-center gap-2">
-                    <span className="text-xs font-medium text-[#25343F]/80">Button {index + 1}</span>
+                    <span className="text-xs font-medium text-[#17153B]/80">Button {index + 1}</span>
                     {buttons.length > 1 && (
                       <button
                         type="button"
@@ -324,9 +324,9 @@ export const ProjectModal = ({ item, onClose, onSuccess }: Props) => {
                       type="checkbox"
                       checked={btn.disabled}
                       onChange={(e) => updateButton(index, "disabled", e.target.checked)}
-                      className="rounded border-[#BFC9D1] text-[#FF9B51] focus:ring-[#FF9B51]"
+                      className="rounded border-[#433D8B] text-[#C8ACD6] focus:ring-[#C8ACD6]"
                     />
-                    <span className="text-xs text-[#25343F]">Disabled (no link required)</span>
+                    <span className="text-xs text-[#17153B]">Disabled (no link required)</span>
                   </label>
                 </div>
               ))}
@@ -337,7 +337,7 @@ export const ProjectModal = ({ item, onClose, onSuccess }: Props) => {
             <button
               type="button"
               onClick={onClose}
-              className="w-full sm:w-auto px-4 py-2 rounded-lg bg-[#BFC9D1] text-[#25343F] hover:bg-[#BFC9D1]/80 transition text-sm sm:text-base"
+              className="w-full sm:w-auto px-4 py-2 rounded-lg bg-[#433D8B] text-[#17153B] hover:bg-[#433D8B]/80 transition text-sm sm:text-base"
             >
               Cancel
             </button>
@@ -345,7 +345,7 @@ export const ProjectModal = ({ item, onClose, onSuccess }: Props) => {
               type="button"
               onClick={handleSubmit}
               disabled={loading}
-              className="w-full sm:w-auto px-4 py-2 rounded-lg bg-[#25343F] text-white hover:bg-[#25343F]/90 disabled:opacity-50 transition text-sm sm:text-base"
+              className="w-full sm:w-auto px-4 py-2 rounded-lg bg-[#17153B] text-white hover:bg-[#17153B]/90 disabled:opacity-50 transition text-sm sm:text-base"
             >
               {loading ? "Saving..." : item ? "Update" : "Create"}
             </button>

@@ -108,8 +108,8 @@ export const TestimonialModal = ({ item, onClose, onSuccess }: Props) => {
   };
 
   const fieldClass = (field: string) =>
-    `w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#FF9B51] focus:border-transparent ${
-      errors[field] ? "border-red-500" : "border-[#BFC9D1]"
+    `w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#C8ACD6] focus:border-transparent ${
+      errors[field] ? "border-red-500" : "border-[#433D8B]"
     }`;
 
   return (
@@ -117,8 +117,8 @@ export const TestimonialModal = ({ item, onClose, onSuccess }: Props) => {
       className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-3 sm:p-4 overflow-y-auto"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="bg-[#EAEFEF] p-4 sm:p-6 rounded-xl w-full max-w-md shadow-xl max-h-[90vh] overflow-y-auto my-auto">
-        <h2 className="text-base sm:text-lg font-semibold text-[#25343F] mb-4">
+      <div className="bg-[#F0EBF5] p-4 sm:p-6 rounded-xl w-full max-w-md shadow-xl max-h-[90vh] overflow-y-auto my-auto">
+        <h2 className="text-base sm:text-lg font-semibold text-[#17153B] mb-4">
           {item ? "Edit" : "Add"} Testimonial
         </h2>
 
@@ -130,7 +130,7 @@ export const TestimonialModal = ({ item, onClose, onSuccess }: Props) => {
 
         <div className="flex flex-col gap-4">
           <div>
-            <label className="block text-sm font-medium text-[#25343F] mb-1">
+            <label className="block text-sm font-medium text-[#17153B] mb-1">
               Name <span className="text-red-500">*</span>
             </label>
             <input
@@ -145,8 +145,8 @@ export const TestimonialModal = ({ item, onClose, onSuccess }: Props) => {
 
           {!item && (
             <div>
-              <label className="block text-sm font-medium text-[#25343F] mb-1">
-                Email <span className="text-[#25343F]/60 font-normal">(optional)</span>
+              <label className="block text-sm font-medium text-[#17153B] mb-1">
+                Email <span className="text-[#17153B]/60 font-normal">(optional)</span>
               </label>
               <input
                 type="email"
@@ -161,7 +161,7 @@ export const TestimonialModal = ({ item, onClose, onSuccess }: Props) => {
           )}
 
           <div>
-            <label className="block text-sm font-medium text-[#25343F] mb-1">
+            <label className="block text-sm font-medium text-[#17153B] mb-1">
               Designation <span className="text-red-500">*</span>
             </label>
             <input
@@ -175,7 +175,7 @@ export const TestimonialModal = ({ item, onClose, onSuccess }: Props) => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-[#25343F] mb-1">
+            <label className="block text-sm font-medium text-[#17153B] mb-1">
               Company <span className="text-red-500">*</span>
             </label>
             <input
@@ -189,7 +189,7 @@ export const TestimonialModal = ({ item, onClose, onSuccess }: Props) => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-[#25343F] mb-1">
+            <label className="block text-sm font-medium text-[#17153B] mb-1">
               Testimonial <span className="text-red-500">*</span>
             </label>
             <textarea
@@ -203,9 +203,9 @@ export const TestimonialModal = ({ item, onClose, onSuccess }: Props) => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-[#25343F] mb-1">Photo (optional)</label>
+            <label className="block text-sm font-medium text-[#17153B] mb-1">Photo (optional)</label>
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
-              <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-[#BFC9D1] bg-[#BFC9D1]/50 flex items-center justify-center">
+              <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-[#433D8B] bg-[#433D8B]/50 flex items-center justify-center">
                 {preview ? (
                   <img src={preview} alt="Preview" className="w-full h-full object-cover" />
                 ) : (
@@ -216,7 +216,7 @@ export const TestimonialModal = ({ item, onClose, onSuccess }: Props) => {
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
-                className="text-sm text-[#25343F] file:mr-2 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#25343F] file:text-white file:cursor-pointer hover:file:bg-[#25343F]/90"
+                className="text-sm text-[#17153B] file:mr-2 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#17153B] file:text-white file:cursor-pointer hover:file:bg-[#17153B]/90"
               />
             </div>
           </div>
@@ -224,14 +224,14 @@ export const TestimonialModal = ({ item, onClose, onSuccess }: Props) => {
           <div className="flex flex-col-reverse sm:flex-row justify-end gap-2 sm:gap-3 pt-2">
             <button
               onClick={onClose}
-              className="w-full sm:w-auto px-4 py-2 rounded-lg bg-[#BFC9D1] text-[#25343F] hover:bg-[#BFC9D1]/80 transition text-sm sm:text-base"
+              className="w-full sm:w-auto px-4 py-2 rounded-lg bg-[#433D8B] text-[#17153B] hover:bg-[#433D8B]/80 transition text-sm sm:text-base"
             >
               Cancel
             </button>
             <button
               onClick={handleSubmit}
               disabled={loading}
-              className="w-full sm:w-auto px-4 py-2 rounded-lg bg-[#25343F] text-white hover:bg-[#25343F]/90 disabled:opacity-50 transition text-sm sm:text-base"
+              className="w-full sm:w-auto px-4 py-2 rounded-lg bg-[#17153B] text-white hover:bg-[#17153B]/90 disabled:opacity-50 transition text-sm sm:text-base"
             >
               {loading ? "Saving..." : item ? "Update" : "Create"}
             </button>

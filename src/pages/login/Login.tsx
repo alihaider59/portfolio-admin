@@ -28,34 +28,34 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#EAEFEF] flex items-center justify-center p-4 sm:p-6">
-      <div className="w-full max-w-md bg-[#BFC9D1] p-6 sm:p-8 rounded-xl shadow-md">
-        <h2 className="text-xl sm:text-2xl font-bold text-[#25343F] mb-6 text-center">
+    <div className="min-h-screen bg-[#F0EBF5] flex items-center justify-center p-4 sm:p-6">
+      <div className="w-full max-w-md bg-white border border-[#433D8B]/40 p-6 sm:p-8 rounded-xl shadow-md">
+        <h2 className="text-xl sm:text-2xl font-bold text-[#17153B] mb-6 text-center">
           Admin Login
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-[#25343F] mb-1">
+            <label className="block text-sm font-medium text-[#17153B] mb-1">
               Email
             </label>
             <input
               type="email"
               required
-              className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#FF9B51]"
+              className="w-full px-3 py-2 rounded-md border border-[#433D8B]/50 focus:outline-none focus:ring-2 focus:ring-[#C8ACD6]"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-[#25343F] mb-1">
+            <label className="block text-sm font-medium text-[#17153B] mb-1">
               Password
             </label>
             <input
               type="password"
               required
-              className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#FF9B51]"
+              className="w-full px-3 py-2 rounded-md border border-[#433D8B]/50 focus:outline-none focus:ring-2 focus:ring-[#C8ACD6]"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -64,7 +64,7 @@ export const LoginPage = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#FF9B51] text-white py-2 rounded-md font-semibold hover:opacity-90 transition disabled:opacity-50"
+            className="w-full bg-[#17153B] text-white py-2 rounded-md font-semibold hover:bg-[#2E236C] transition disabled:opacity-50"
           >
             {loading ? "Logging in..." : "Login"}
           </button>

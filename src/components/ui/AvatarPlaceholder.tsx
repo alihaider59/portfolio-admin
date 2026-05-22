@@ -13,7 +13,7 @@ export const AvatarPlaceholder = ({ name, className = "" }: Props) => {
     .toUpperCase() || "?";
   return (
     <div
-      className={`flex items-center justify-center rounded-full bg-[#25343F]/20 text-[#25343F] font-semibold text-sm shrink-0 ${className}`}
+      className={`flex items-center justify-center rounded-full bg-[#17153B]/20 text-[#17153B] font-semibold text-sm shrink-0 ${className}`}
       title={name}
     >
       {initial}

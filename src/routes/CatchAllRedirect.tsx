@@ -7,7 +7,7 @@ export const CatchAllRedirect = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-[#25343F]">
+      <div className="min-h-screen flex items-center justify-center text-[#17153B]">
         Loading...
       </div>
     );

@@ -1,13 +1,13 @@
-import { type Project } from "../../types/project";
+import { type Experience } from "../../types/experience";
 import { DetailModal } from "../../components/ui/DetailModal";
-import { ProjectImagePlaceholder } from "../../components/ui/ProjectImagePlaceholder";
+import { ExperienceIconPreview } from "../../components/ui/ExperienceIconPreview";
 
 interface Props {
-  item: Project | null;
+  item: Experience | null;
   loading: boolean;
   onClose: () => void;
-  onEdit: (item: Project) => void;
-  onDelete: (item: Project) => void;
+  onEdit: (item: Experience) => void;
+  onDelete: (item: Experience) => void;
 }
 
 const formatDate = (iso: string) =>
@@ -19,36 +19,33 @@ const formatDate = (iso: string) =>
     minute: "2-digit",
   });
 
-export const ProjectDetailModal = ({
+export const ExperienceDetailModal = ({
   item,
   loading,
   onClose,
   onEdit,
   onDelete,
 }: Props) => (
-  <DetailModal title="Project Details" onClose={onClose}>
+  <DetailModal title="Experience Details" onClose={onClose}>
     {loading ? (
       <div className="py-8 text-center text-[#17153B]/70">Loading...</div>
     ) : !item ? (
-      <div className="py-8 text-center text-red-600">Failed to load project.</div>
+      <div className="py-8 text-center text-red-600">Failed to load experience.</div>
     ) : (
       <div className="space-y-4">
         <div className="flex items-start gap-4">
-          {item.image ? (
-            <img
-              src={item.image}
-              alt={item.name}
-              className="w-24 h-16 rounded-lg object-cover border-2 border-[#433D8B] shrink-0"
-            />
-          ) : (
-            <ProjectImagePlaceholder name={item.name} className="w-24 h-16 text-base" />
-          )}
+          <ExperienceIconPreview
+            companyName={item.companyName}
+            icon={item.icon}
+            iconBg={item.iconBg}
+            className="w-16 h-16 min-w-[4rem] min-h-[4rem]"
+            variant="rounded"
+          />
           <div className="min-w-0 flex-1">
-            <h3 className="font-semibold text-[#17153B] text-lg">{item.name}</h3>
+            <h3 className="font-semibold text-[#17153B] text-lg">{item.title}</h3>
+            <p className="text-[#17153B]/80 text-sm mt-0.5">{item.companyName}</p>
+            <p className="text-[#C8ACD6] text-sm mt-1">{item.date}</p>
             <div className="flex flex-wrap gap-2 mt-2">
-              {item.isPrivate && (
-                <span className="text-xs bg-[#17153B] text-white px-2 py-0.5 rounded">Private</span>
-              )}
               <span
                 className={`text-xs px-2 py-0.5 rounded ${
                   item.isActive
@@ -61,43 +58,22 @@ export const ProjectDetailModal = ({
               <span className="text-xs bg-[#C8ACD6]/20 text-[#17153B] px-2 py-0.5 rounded">
                 Order: {item.sortOrder}
               </span>
+              <span className="text-xs bg-[#433D8B]/50 text-[#17153B] px-2 py-0.5 rounded font-mono">
+                {item.iconBg}
+              </span>
             </div>
           </div>
         </div>
 
         <div>
-          <h4 className="text-sm font-medium text-[#17153B] mb-2">Description</h4>
-          <p className="text-[#17153B]/90 leading-relaxed bg-white/60 p-4 rounded-lg text-sm">
-            {item.description}
-          </p>
-        </div>
-
-        <div>
-          <h4 className="text-sm font-medium text-[#17153B] mb-2">Buttons</h4>
-          {item.buttons.length === 0 ? (
-            <p className="text-sm text-[#17153B]/70">No buttons configured.</p>
+          <h4 className="text-sm font-medium text-[#17153B] mb-2">Responsibilities & achievements</h4>
+          {item.points.length === 0 ? (
+            <p className="text-sm text-[#17153B]/70">No bullet points.</p>
           ) : (
-            <ul className="space-y-2">
-              {item.buttons.map((btn, i) => (
-                <li
-                  key={`${btn.label}-${i}`}
-                  className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 p-3 bg-white/60 rounded-lg text-sm"
-                >
-                  <span className="font-medium text-[#17153B]">{btn.label}</span>
-                  {btn.disabled ? (
-                    <span className="text-xs text-[#17153B]/60">Disabled</span>
-                  ) : btn.link ? (
-                    <a
-                      href={btn.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#C8ACD6] hover:underline text-xs sm:text-sm break-all"
-                    >
-                      {btn.link}
-                    </a>
-                  ) : (
-                    <span className="text-xs text-[#17153B]/60">No link</span>
-                  )}
+            <ul className="list-disc list-inside space-y-2 bg-white/60 p-4 rounded-lg text-sm text-[#17153B]/90">
+              {item.points.map((point, i) => (
+                <li key={i} className="leading-relaxed">
+                  {point}
                 </li>
               ))}
             </ul>

@@ -12,8 +12,6 @@ export const getProjects = async (
 ): Promise<PaginatedResponse<Project>> => {
   const response = await apiClient.get<PaginatedResponse<Project>>("/projects", {
     params: { page, limit },
-    // List is public on the API; omitting the token avoids false 403/logout edge cases.
-    skipAuth: true,
   });
   const body = response.data;
   return {

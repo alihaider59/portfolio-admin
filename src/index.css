@@ -11,6 +11,8 @@
   body {
     min-width: 0;
     overflow-x: hidden;
+    background-color: #ffffff;
+    color: #17153B;
   }
 }
 
@@ -31,21 +33,21 @@
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
-  scrollbar-color: #25343F #EAEFEF;
-  padding-bottom: 4px; /* space above scrollbar so it’s visible */
+  scrollbar-color: #17153B #F0EBF5;
+  padding-bottom: 4px;
 }
 .table-scroll-wrap::-webkit-scrollbar {
   height: 10px;
 }
 .table-scroll-wrap::-webkit-scrollbar-track {
-  background: #EAEFEF;
+  background: #F0EBF5;
   border-radius: 5px;
   margin: 0 4px;
 }
 .table-scroll-wrap::-webkit-scrollbar-thumb {
-  background: #25343F;
+  background: #2E236C;
   border-radius: 5px;
 }
 .table-scroll-wrap::-webkit-scrollbar-thumb:hover {
-  background: #FF9B51;
+  background: #433D8B;
 }

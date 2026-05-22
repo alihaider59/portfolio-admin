@@ -101,43 +101,43 @@ export const ContactListPage = () => {
 
   return (
     <AdminLayout>
-      <div className="bg-white rounded-lg sm:rounded-xl shadow-md border border-[#BFC9D1]/50 overflow-hidden min-w-0 w-full">
-        <div className="p-4 sm:p-6 lg:p-6 xl:p-8 border-b border-[#BFC9D1]/50">
-          <h2 className="text-lg sm:text-xl lg:text-xl xl:text-2xl font-semibold text-[#25343F]">Contacts</h2>
-          <p className="text-sm sm:text-sm lg:text-base xl:text-base text-[#25343F]/70 mt-1">
+      <div className="bg-white rounded-lg sm:rounded-xl shadow-md border border-[#433D8B]/50 overflow-hidden min-w-0 w-full">
+        <div className="p-4 sm:p-6 lg:p-6 xl:p-8 border-b border-[#433D8B]/50">
+          <h2 className="text-lg sm:text-xl lg:text-xl xl:text-2xl font-semibold text-[#17153B]">Contacts</h2>
+          <p className="text-sm sm:text-sm lg:text-base xl:text-base text-[#17153B]/70 mt-1">
             Contact form submissions
           </p>
         </div>
 
         {loading ? (
-          <div className="p-6 sm:p-12 text-center text-[#25343F]/70 text-sm sm:text-base">Loading contacts...</div>
+          <div className="p-6 sm:p-12 text-center text-[#17153B]/70 text-sm sm:text-base">Loading contacts...</div>
         ) : contacts.length === 0 ? (
-          <div className="p-6 sm:p-12 text-center text-[#25343F]/70 text-sm sm:text-base">No contacts yet.</div>
+          <div className="p-6 sm:p-12 text-center text-[#17153B]/70 text-sm sm:text-base">No contacts yet.</div>
         ) : (
           <>
             {/* One layout only: cards below 1024px, table from 1024px up */}
             {!showTableView ? (
-              <div className="divide-y divide-[#BFC9D1]/30">
+              <div className="divide-y divide-[#433D8B]/30">
                 {contacts.map((contact) => (
                   <div
                     key={contact._id}
-                    className="p-4 bg-[#FAFAFA] hover:bg-[#EAEFEF]/50 transition"
+                    className="p-4 bg-[#FAFAFA] hover:bg-[#F0EBF5]/50 transition"
                   >
-                    <p className="font-medium text-[#25343F] text-sm truncate">{contact.name}</p>
+                    <p className="font-medium text-[#17153B] text-sm truncate">{contact.name}</p>
                     <a
                       href={`mailto:${contact.email}`}
-                      className="text-[#FF9B51] hover:underline text-xs sm:text-sm break-all block mt-0.5"
+                      className="text-[#C8ACD6] hover:underline text-xs sm:text-sm break-all block mt-0.5"
                     >
                       {contact.email}
                     </a>
-                    <p className="text-[#25343F]/80 text-xs mt-1 overflow-hidden max-h-10 sm:max-h-none sm:truncate">
+                    <p className="text-[#17153B]/80 text-xs mt-1 overflow-hidden max-h-10 sm:max-h-none sm:truncate">
                       {contact.message}
                     </p>
-                    <p className="text-[#25343F]/60 text-xs mt-2">{formatDate(contact.createdAt)}</p>
+                    <p className="text-[#17153B]/60 text-xs mt-2">{formatDate(contact.createdAt)}</p>
                     <div className="flex gap-2 mt-3">
                       <button
                         onClick={() => openDetailModal(contact._id)}
-                        className="flex-1 py-2 rounded-lg bg-[#25343F] text-white text-sm font-medium"
+                        className="flex-1 py-2 rounded-lg bg-[#17153B] text-white text-sm font-medium"
                       >
                         View
                       </button>
@@ -155,35 +155,35 @@ export const ContactListPage = () => {
               <div className="table-scroll-wrap">
                 <table className="w-full min-w-[960px] text-left border-collapse table-auto">
                   <thead>
-                    <tr className="bg-[#EAEFEF] border-b border-[#BFC9D1]">
-                      <th className="px-3 py-2 sm:px-4 sm:py-3 text-sm font-semibold text-[#25343F] text-left">Name</th>
-                      <th className="px-3 py-2 sm:px-4 sm:py-3 text-sm font-semibold text-[#25343F] text-left">Email</th>
-                      <th className="px-3 py-2 sm:px-4 sm:py-3 text-sm font-semibold text-[#25343F] text-left">Message</th>
-                      <th className="px-3 py-2 sm:px-4 sm:py-3 text-sm font-semibold text-[#25343F] text-left whitespace-nowrap">Date</th>
-                      <th className="px-3 py-2 sm:px-4 sm:py-3 pr-6 text-sm font-semibold text-[#25343F] text-left">Actions</th>
+                    <tr className="bg-[#F0EBF5] border-b border-[#433D8B]">
+                      <th className="px-3 py-2 sm:px-4 sm:py-3 text-sm font-semibold text-[#17153B] text-left">Name</th>
+                      <th className="px-3 py-2 sm:px-4 sm:py-3 text-sm font-semibold text-[#17153B] text-left">Email</th>
+                      <th className="px-3 py-2 sm:px-4 sm:py-3 text-sm font-semibold text-[#17153B] text-left">Message</th>
+                      <th className="px-3 py-2 sm:px-4 sm:py-3 text-sm font-semibold text-[#17153B] text-left whitespace-nowrap">Date</th>
+                      <th className="px-3 py-2 sm:px-4 sm:py-3 pr-6 text-sm font-semibold text-[#17153B] text-left">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     {contacts.map((contact) => (
                       <tr
                         key={contact._id}
-                        className="border-b border-[#BFC9D1]/30 hover:bg-[#EAEFEF]/50 transition"
+                        className="border-b border-[#433D8B]/30 hover:bg-[#F0EBF5]/50 transition"
                       >
                         <td className="px-3 py-2 sm:px-4 sm:py-3 align-top whitespace-nowrap">
-                          <span className="font-medium text-[#25343F] text-sm">{contact.name}</span>
+                          <span className="font-medium text-[#17153B] text-sm">{contact.name}</span>
                         </td>
                         <td className="px-3 py-2 sm:px-4 sm:py-3 align-top whitespace-nowrap">
-                          <a href={`mailto:${contact.email}`} className="text-[#FF9B51] hover:underline text-sm">{contact.email}</a>
+                          <a href={`mailto:${contact.email}`} className="text-[#C8ACD6] hover:underline text-sm">{contact.email}</a>
                         </td>
                         <td className="px-3 py-2 sm:px-4 sm:py-3 align-top whitespace-nowrap max-w-[280px]">
-                          <span className="block truncate text-[#25343F]/80 text-sm" title={contact.message}>
+                          <span className="block truncate text-[#17153B]/80 text-sm" title={contact.message}>
                             {contact.message.length > 60 ? `${contact.message.slice(0, 60)}...` : contact.message}
                           </span>
                         </td>
-                        <td className="px-3 py-2 sm:px-4 sm:py-3 text-sm text-[#25343F]/70 whitespace-nowrap align-top">{formatDate(contact.createdAt)}</td>
+                        <td className="px-3 py-2 sm:px-4 sm:py-3 text-sm text-[#17153B]/70 whitespace-nowrap align-top">{formatDate(contact.createdAt)}</td>
                         <td className="px-3 py-2 sm:px-4 sm:py-3 pr-6 align-top">
                           <div className="flex gap-2">
-                            <button type="button" onClick={() => openDetailModal(contact._id)} className="shrink-0 px-3 py-1.5 rounded-lg bg-[#25343F] text-white hover:bg-[#25343F]/90 text-sm font-medium whitespace-nowrap">
+                            <button type="button" onClick={() => openDetailModal(contact._id)} className="shrink-0 px-3 py-1.5 rounded-lg bg-[#17153B] text-white hover:bg-[#17153B]/90 text-sm font-medium whitespace-nowrap">
                               View
                             </button>
                             <button type="button" onClick={() => setConfirmDelete(contact)} className="shrink-0 px-3 py-1.5 rounded-lg bg-red-600 text-white hover:bg-red-700 text-sm font-medium whitespace-nowrap">
@@ -198,7 +198,7 @@ export const ContactListPage = () => {
               </div>
             )}
 
-            <div className="p-4 sm:p-4 lg:p-5 xl:p-6 border-t border-[#BFC9D1]/50">
+            <div className="p-4 sm:p-4 lg:p-5 xl:p-6 border-t border-[#433D8B]/50">
               <Pagination
                 page={page}
                 limit={limit}

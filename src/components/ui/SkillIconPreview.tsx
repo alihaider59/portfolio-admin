@@ -1,15 +1,26 @@
 interface Props {
   name: string;
+  icon?: string | null;
   className?: string;
 }
 
-export const ProjectImagePlaceholder = ({ name, className = "w-12 h-12" }: Props) => {
+export const SkillIconPreview = ({ name, icon, className = "w-12 h-12" }: Props) => {
   const initials = name
     .split(/\s+/)
     .slice(0, 2)
     .map((w) => w[0])
     .join("")
     .toUpperCase() || "?";
+
+  if (icon) {
+    return (
+      <img
+        src={icon}
+        alt={name}
+        className={`${className} rounded-lg object-cover border-2 border-[#433D8B] shrink-0`}
+      />
+    );
+  }
 
   return (
     <div

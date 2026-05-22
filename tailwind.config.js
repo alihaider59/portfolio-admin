@@ -4,10 +4,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        light: "#EAEFEF",       // priority 1
-        secondary: "#BFC9D1",   // priority 2
-        dark: "#25343F",        // priority 3
-        accent: "#FF9B51",      // priority 4
+        /* Brand palette — priority 1 → 4 */
+        primary: "#17153B",
+        secondary: "#2E236C",
+        muted: "#433D8B",
+        accent: "#C8ACD6",
+        /* Derived surfaces */
+        surface: "#F0EBF5",
+        "surface-card": "#FFFFFF",
       },
     },
   },
